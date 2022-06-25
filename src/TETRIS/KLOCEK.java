@@ -1,80 +1,105 @@
 package TETRIS;
+import java.awt.*;
+import java.util.Random;
 
-import java.awt.Color;
     public class KLOCEK {
 
-        protected enum Shapes { NoShape, ZShape, SShape, LineShape,
-            TShape, SquareShape, LShape, MirroredLShape };
-        private Shapes shapee;
-        int[][] shape;
-        private Color color;
-        int x;
-        int y;
+        int x, y;
 
-        public KLOCEK(int[][] shape, Color color){
-            this.shape=shape;
-            this.color=color;
+        protected enum Shapes {jeden, dwa, trzy, cztery, piec, szczesc, siedem, osiem}
+
+        public int[][] xy;
+        public int[][] shape;
+        public int[][][] tablica;
+        public Color color;
+
+        public KLOCEK(int[][] shape, Color color) {
+            this.shape = shape;
+            this.color = color;
         }
 
-        private void initShape() {
+        public void Shape() {
+            xy = new int[4][2];
 
-            coords = new int[4][2];
-
-            coordsTable = new int[][][] {
-                    { { 0, 0 },   { 0, 0 },   { 0, 0 },   { 0, 0 } },
-                    { { 0, -1 },  { 0, 0 },   { -1, 0 },  { -1, 1 } },
-                    { { 0, -1 },  { 0, 0 },   { 1, 0 },   { 1, 1 } },
-                    { { 0, -1 },  { 0, 0 },   { 0, 1 },   { 0, 2 } },
-                    { { -1, 0 },  { 0, 0 },   { 1, 0 },   { 0, 1 } },
-                    { { 0, 0 },   { 1, 0 },   { 0, 1 },   { 1, 1 } },
-                    { { -1, -1 }, { 0, -1 },  { 0, 0 },   { 0, 1 } },
-                    { { 1, -1 },  { 0, -1 },  { 0, 0 },   { 0, 1 } }
+            tablica = new int[][][]{
+                    {{0, 0}, {0, 0}, {0, 0}, {0, 0}},
+                    {{0, -1}, {0, 0}, {-1, 0}, {-1, 1}},
+                    {{0, -1}, {0, 0}, {1, 0}, {1, 1}},
+                    {{0, -1}, {0, 0}, {0, 1}, {0, 2}},
+                    {{-1, 0}, {0, 0}, {1, 0}, {0, 1}},
+                    {{0, 0}, {1, 0}, {0, 1}, {1, 1}},
+                    {{-1, -1}, {0, -1}, {0, 0}, {0, 1}},
+                    {{1, -1}, {0, -1}, {0, 0}, {0, 1}}
             };
-
-            setShape(Shapes.NoShape);
         }
-
+        public int[][] getShape(){
+            return shape;
+        }
+        public int getH(){
+            return shape.length;
+        }
+        public int getW(){
+            return shape[0].length;
+        }
         public int getx(){
-            System.out.printf("TO JEST x: ");
-            System.out.printf(String.valueOf(x));
             return x;
         }
-
         public int gety(){
-            System.out.printf("to jest y: ");
-            System.out.printf(String.valueOf(y));
             return y;
         }
 
-
-        protected void setShape(Shapes shape) {
-
-            for (int i = 0; i < 4 ; i++) {
-
-                for (int j = 0; j < 2; ++j) {
-
-                    coords[i][j] = coordsTable[shape.ordinal()][i][j];
-                }
-            }
-
-            pieceShape = shape;
-        }
-
-
-        public Shapes getShape(){
-            return shapee;
+        public int down(){
+            return y++;
         }
 
         public Color getColor(){
             return color;
         }
 
-        public int getHeight() {
-            return shape.length;
+        public Color ggetColor(){
+            Random rand = new Random();
+            int k = rand.nextInt(7);
+            Color magenta = new Color(255,0,255);
+            Color pink = new Color(255,175,175);
+            Color blue = new Color(0,175,225);
+            Color green = new Color(0,225,0);
+            Color red = new Color(255,0,0);
+            Color yellow = new Color(255, 200, 0);
+            Color random = new Color(200, 154, 234);
+
+            switch (k) {
+                case 5:{
+                    return Color.pink;
+                }
+                case 1:
+                    return red;
+                case 2:
+                    return pink;
+                case 3:
+                    return green;
+                case 4:
+                    return blue;
+                case 0:
+                    return yellow;
+                case 6:
+                    return magenta;
+                default:
+                    return random;
+            }
+        }
+        public int left(){
+            return x--;
         }
 
-        public int getWeight() {
-            return shape[0].length;
+        public int right(){
+            return x++;
         }
+
+
+        public int stopdown(){
+            return y + getH();
+        }
+
 
     }
+

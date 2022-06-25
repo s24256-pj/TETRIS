@@ -1,22 +1,17 @@
 package TETRIS;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class GRA extends JFrame {
-
-    private JLabel statusbar;
+public class GRA extends JFrame{
 
     public GRA() {
-
-        initUI();
+        plansza();
     }
 
-    private void initUI() {
-
-        statusbar = new JLabel(" 0");
-        add(statusbar, BorderLayout.SOUTH);
+    private void plansza() {
 
         var tetris = new TETRIS(this);
         add(tetris);
@@ -24,23 +19,13 @@ public class GRA extends JFrame {
 
         setTitle("Tetris");
         setSize(300, 600);
-        setBackground(Color.WHITE);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-    }
-
-    JLabel getStatusBar() {
-
-        return statusbar;
+        setVisible(true);
     }
 
     public static void main(String[] args) {
-
-        EventQueue.invokeLater(() -> {
-
-            var grra = new GRA();
-            grra.setVisible(true);
-        });
+        new GRA();
     }
 }
 
