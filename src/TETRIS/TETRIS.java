@@ -29,10 +29,15 @@ public class TETRIS extends JPanel {
     public void start() {
         timer = new Timer(time, new down());
         timer.start();
-        klocek = new KLOCEK(new int [][]{{0, -1}, {0, 0}, {1, 0}, {1, 1}}, Color.pink);
+        nowy();
+
         background = new Color[rows][columns];
-        background[0][0] = Color.blue;
     }
+
+    public void nowy(){
+        klocek = new KLOCEK(new int [][]{{0, 0}, {0, 0}, {0, 0}, {1, 0}}, Color.pink);
+    }
+
     public TETRIS(GRA gra) {
         initBoard(gra);
     }
@@ -75,7 +80,10 @@ public class TETRIS extends JPanel {
                 color=background[i][j];
 
                 if(color != null){
-                    drawbackklocek(g,color,x,y);
+                    int x = j*cellsize;
+                    int y = i*cellsize;
+                    g.setColor(color);
+                    g.fillRect(x,y,cellsize,cellsize);
                 }
             }
         }
@@ -88,13 +96,15 @@ public class TETRIS extends JPanel {
     }
 
     public void dodown(){
-        if(stdown()==false){return;
+        if(stdown()==false){
+            nowy();
         }
         klocek.down();
         repaint();
     }
 
     public boolean stdown(){
+
         if(klocek.stopdown() == rows-1) {
             wtlo();
             return false;
@@ -139,12 +149,12 @@ public class TETRIS extends JPanel {
         @Override
         public void keyPressed(KeyEvent e) {
 
-            if (e.getKeyCode() == KeyEvent.VK_LEFT && x != 0){
-                klocek.right();
+            if (e.getKeyCode() == KeyEvent.VK_LEFT){
+                klocek.left();
             }
 
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT && x != 270){
-                klocek.left();
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+                klocek.right();
             }
         }
 

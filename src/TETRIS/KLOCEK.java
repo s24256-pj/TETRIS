@@ -53,7 +53,7 @@ import java.util.Random;
         }
 
         public Color getColor(){
-            return color;
+            return ggetColor();
         }
 
         public Color ggetColor(){
@@ -97,6 +97,7 @@ import java.util.Random;
 
 
         public int stopdown(){
+
             return y + getH();
         }
 

@@ -21,6 +21,7 @@ public class GRA extends JFrame{
         setSize(300, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setResizable(false);
         setVisible(true);
     }
 
